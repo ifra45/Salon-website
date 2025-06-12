@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Training - Luxe Beauty Academy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d4af37;
+            --secondary-color: #2c2c2c;
+            --accent-color: #f8f8f8;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(44, 44, 44, 0.95);
+        }
+
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color) !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
+            color: white;
+            padding: 150px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle cx="200" cy="200" r="150" fill="rgba(212,175,55,0.1)"/><circle cx="800" cy="400" r="200" fill="rgba(212,175,55,0.05)"/><circle cx="1000" cy="150" r="100" fill="rgba(212,175,55,0.15)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: var(--primary-color);
+        }
+
+        .course-header {
+            background: linear-gradient(45deg, var(--primary-color), #b8941f);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .course-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .course-body {
+            padding: 2rem;
+        }
+
+        .course-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .btn-luxury {
+            background: linear-gradient(45deg, var(--primary-color), #b8941f);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-luxury:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
+            color: white;
+        }
+
+        .instructor-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            height: 100%;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+        }
+
+        .instructor-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, var(--primary-color), #b8941f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+        }
+
+        .instructor-avatar::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+            top: -10px;
+            left: -10px;
+            opacity: 0.3;
+        }
+
+        .certification-badge {
+            background: linear-gradient(45deg, var(--primary-color), #b8941f);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--primary-color);
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
+            color: white;
+            padding: 5rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent-color), #f0f0f0);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            .timeline::before {
+                left: 30px;
+            }
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+            }
+            .timeline-marker {
+                left: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <!--logo-->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="logo.png.jpeg" alt="Luxe Beauty Salon Logo" class="rounded-circle" style="height: 50px; margin-right: 10px;">
+            <span>Luxe Beauty</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="training.html">Training</a></li>
+                    <li class="nav-item"><a class="nav-link" href="extras.html">Shop & More</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="page-title">Professional Training Academy</h1>
+                    <p class="lead">Master the art of beauty with our comprehensive certification programs. Learn from industry experts and launch your successful career in beauty and wellness.</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fas fa-graduation-cap" style="font-size: 8rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Programs -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Certification Programs</h2>
+            <div class="row g-4">
+                <!-- Hair Styling Course -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon">
+                                <i class="fas fa-cut"></i>
+                            </div>
+                            <h3>Professional Hair Styling</h3>
+                            <p>Master cuts, colors, and advanced techniques</p>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-price">$2,499</div>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> 120 hours of hands-on training</li>
+                                <li><i class="fas fa-check"></i> Color theory and application</li>
+                                <li><i class="fas fa-check"></i> Advanced cutting techniques</li>
+                                <li><i class="fas fa-check"></i> Business fundamentals</li>
+                                <li><i class="fas fa-check"></i> State certification prep</li>
+                                <li><i class="fas fa-check"></i> Job placement assistance</li>
+                            </ul>
+                            <a href="#" class="btn-luxury mt-3">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Esthetics Course -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <h3>Advanced Esthetics</h3>
+                            <p>Skincare, facials, and wellness treatments</p>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-price">$1,899</div>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> 80 hours comprehensive training</li>
+                                <li><i class="fas fa-check"></i> Skin analysis and treatment</li>
+                                <li><i class="fas fa-check"></i> Chemical peels and microdermabrasion</li>
+                                <li><i class="fas fa-check"></i> Product knowledge</li>
+                                <li><i class="fas fa-check"></i> Client consultation skills</li>
+                                <li><i class="fas fa-check"></i> Certification included</li>
+                            </ul>
+                            <a href="#" class="btn-luxury mt-3">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nail Technology Course -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon">
+                                <i class="fas fa-hand-sparkles"></i>
+                            </div>
+                            <h3>Nail Technology</h3>
+                            <p>Complete nail care and artistic design</p>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-price">$1,299</div>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> 60 hours intensive training</li>
+                                <li><i class="fas fa-check"></i> Manicure and pedicure techniques</li>
+                                <li><i class="fas fa-check"></i> Gel and acrylic applications</li>
+                                <li><i class="fas fa-check"></i> Nail art and design</li>
+                                <li><i class="fas fa-check"></i> Sanitation and safety</li>
+                                <li><i class="fas fa-check"></i> Portfolio development</li>
+                            </ul>
+                            <a href="#" class="btn-luxury mt-3">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Makeup Artistry Course -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h3>Makeup Artistry</h3>
+                            <p>Professional makeup for all occasions</p>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-price">$1,599</div>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> 70 hours creative training</li>
+                                <li><i class="fas fa-check"></i> Bridal and special event makeup</li>
+                                <li><i class="fas fa-check"></i> Color matching and theory</li>
+                                <li><i class="fas fa-check"></i> Contouring and highlighting</li>
+                                <li><i class="fas fa-check"></i> Photography makeup</li>
+                                <li><i class="fas fa-check"></i> Professional kit included</li>
+                            </ul>
+                            <a href="#" class="btn-luxury mt-3">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Mastery Course -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3>Beauty Business Mastery</h3>
+                            <p>Build and grow your beauty empire</p>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-price">$999</div>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> 40 hours business training</li>
+                                <li><i class="fas fa-check"></i> Marketing and social media</li>
+                                <li><i class="fas fa-check"></i> Client retention strategies</li>
+                                <li><i class="fas fa-check"></i> Financial management</li>
+                                <li><i class="fas fa-check"></i> Legal and licensing guidance</li>
+                                <li><i class="fas fa-check"></i> Ongoing mentorship</li>
+                            </ul>
+                            <a href="#" class="btn-luxury mt-3">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Master Package -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card" style="border: 3px solid var(--primary-color);">
+                        <div class="course-header" style="background: linear-gradient(45deg, #2c2c2c, #1a1a1a);">
+                            <div class="course-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h3>Master Beauty Package</h3>
+                            <p>Complete beauty professional certification</p>
+                            <span class="badge bg-warning text-dark">MOST POPULAR</span>
+                        </div>
+                        <div class="course-body">
+                            <div class="course-price">$5,999 <small class="text-muted"><s>$7,996</s></small></div>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check"></i> All 5 courses included</li>
+                                <li><i class="fas fa-check"></i> 370+ hours of training</li>
+                                <li><i class="fas fa-check"></i> Personal mentor assigned</li>
+                                <li><i class="fas fa-check"></i> Lifetime skill updates</li>
+                                <li><i class="fas fa-check"></i> Graduate placement program</li>
+                                <li><i class="fas fa-check"></i> Professional starter kit</li>
+                            </ul>
+                            <a href="#" class="btn-luxury mt-3">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructors Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Meet Our Expert Instructors</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="instructor-card">
+                        <div class="instructor-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h4>Sarah Martinez</h4>
+                        <p class="text-muted">Master Hair Stylist & Color Specialist</p>
+                        <div class="mb-3">
+                            <span class="certification-badge">15+ Years Experience</span>
+                            <span class="certification-badge">Redken Certified</span>
+                        </div>
+                        <p>Sarah brings over 15 years of experience from top NYC salons. Specializes in advanced color techniques and precision cutting.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="instructor-card">
+                        <div class="instructor-avatar">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>Dr. Emily Chen</h4>
+                        <p class="text-muted">Licensed Esthetician & Wellness Expert</p>
+                        <div class="mb-3">
+                            <span class="certification-badge">PhD Dermatology</span>
+                            <span class="certification-badge">CIDESCO Certified</span>
+                        </div>
+                        <p>Dr. Chen combines medical expertise with holistic wellness approaches. Expert in advanced skincare and anti-aging treatments.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="instructor-card">
+                        <div class="instructor-avatar">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h4>James Rodriguez</h4>
+                        <p class="text-muted">Celebrity Makeup Artist & Educator</p>
+                        <div class="mb-3">
+                            <span class="certification-badge">Fashion Week Expert</span>
+                            <span class="certification-badge">MAC Pro Certified</span>
+                        </div>
+                        <p>James has worked with A-list celebrities and top fashion brands. Specializes in editorial and bridal makeup artistry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Timeline -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Your Learning Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4><i class="fas fa-user-plus text-primary me-2"></i>Week 1-2: Foundation</h4>
+                        <p>Start with fundamental theories, safety protocols, and basic techniques. Get familiar with tools and products.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4><i class="fas fa-hands text-primary me-2"></i>Week 3-8: Hands-On Practice</h4>
+                        <p>Intensive practical sessions with mannequins and volunteer models. Master core techniques under expert guidance.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4><i class="fas fa-star text-primary me-2"></i>Week 9-12: Advanced Techniques</h4>
+                        <p>Learn cutting-edge methods, specialty services, and creative applications. Build your signature style.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4><i class="fas fa-certificate text-primary me-2"></i>Week 13-16: Certification & Career Prep</h4>
+                        <p>Final assessments, state exam preparation, portfolio development, and job search assistance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-label">Graduates Placed</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="95">0</div>
+                        <div class="stat-label">Success Rate %</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="12">0</div>
+                        <div class="stat-label">Expert Instructors</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="3">0</div>
+                        <div class="stat-label">Years Excellence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem;">Ready to Start Your Beauty Career?</h2>
+                    <p class="lead mb-0">Join our next class and transform your passion into a thriving professional career. Limited seats available!</p>
+                </div>
+                <div class="col-lg-4 text-lg-end text-center mt-3 mt-lg-0">
+                    <a href="contact.html" class="btn-luxury">Apply Today</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="logo.png.jpeg" alt="Luxe Beauty Salon Logo" class="rounded-circle" style="height: 50px; margin-right: 10px;">
+            <span>Luxe Beauty</span>
+            </a>
+                    <p>Your premier destination for luxury beauty services. We combine expertise with elegance to bring out your natural beauty.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-light text-decoration-none">Home</a></li>
+                        <li><a href="about.html" class="text-light text-decoration-none">About</a></li>
+                        <li><a href="services.html" class="text-light text-decoration-none">Services</a></li>
+                        <li><a href="portfolio.html" class="text-light text-decoration-none">Portfolio</a></li>
+                        <li><a href="extras.html" class="text-light text-decoration-none">Shop & More</a></li>
+                        <li><a href="training.html" class="text-light text-decoration-none">Training</a></li>
+                        <li><a href="contact.html" class="text-light text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Contact Info</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>123 Beauty Street, Salon City</p>
+                    <p><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope me-2"></i>info@luxebeauty.com</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Opening Hours</h5>
+                    <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                    <p>Saturday: 9:00 AM - 6:00 PM</p>
+                    <p>Sunday: 10:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>&copy; 2025 Luxe Beauty Salon. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 100;
+
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Trigger counter animation when stats section is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        // Course card hover effects
+        document.querySelectorAll('.course-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Luxe Beauty Salon</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d4af37;
+            --secondary-color: #2c2c2c;
+            --accent-color: #f8f8f8;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(44, 44, 44, 0.95);
+        }
+
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color) !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .page-header {
+            background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(212,175,55,0.3)), 
+                        linear-gradient(135deg, var(--primary-color), #b8941f);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle cx="200" cy="200" r="150" fill="rgba(255,255,255,0.05)"/><circle cx="800" cy="400" r="200" fill="rgba(255,255,255,0.03)"/><circle cx="1000" cy="150" r="100" fill="rgba(255,255,255,0.07)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .service-category {
+            margin-bottom: 4rem;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .category-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), #b8941f);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: var(--primary-color);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--primary-color), #b8941f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .service-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .service-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .service-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-details li {
+            padding: 0.3rem 0;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-details li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .service-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .price-tag {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .btn-book {
+            background: linear-gradient(45deg, var(--primary-color), #b8941f);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-book:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            color: white;
+        }
+
+        .package-section {
+            background: linear-gradient(135deg, var(--accent-color), #f0f0f0);
+            padding: 5rem 0;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-card.featured {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, var(--primary-color), #b8941f);
+        }
+
+        .package-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .package-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .package-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .package-price .original {
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            color: var(--text-light);
+            margin-right: 10px;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            .service-card {
+                padding: 2rem 1.5rem;
+            }
+            .package-card.featured {
+                transform: none;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <!--logo-->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="logo.png.jpeg" alt="Luxe Beauty Salon Logo" class="rounded-circle" style="height: 50px; margin-right: 10px;">
+            <span>Luxe Beauty</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="training.html">Training</a></li>
+                    <li class="nav-item"><a class="nav-link" href="extras.html">Shop & More</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Services</h1>
+            <p>Discover our comprehensive range of luxury beauty treatments designed to enhance your natural radiance.</p>
+        </div>
+    </section>
+
+    <!-- Hair Services -->
+    <section class="py-5">
+        <div class="container">
+            <div class="service-category">
+                <div class="category-header">
+                    <h2><i class="fas fa-cut me-3"></i>Hair Styling & Color</h2>
+                    <p>Transform your look with our expert hair stylists using premium products and cutting-edge techniques.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-cut"></i>
+                            </div>
+                            <h3 class="service-title">Precision Cut & Style</h3>
+                            <p class="service-description">Professional haircuts tailored to your face shape and lifestyle, including wash, cut, blow-dry, and styling.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>Consultation & face shape analysis</li>
+                                    <li>Premium shampoo & conditioning</li>
+                                    <li>Precision cutting techniques</li>
+                                    <li>Professional blow-dry & styling</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $85</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h3 class="service-title">Color & Highlights</h3>
+                            <p class="service-description">Achieve your perfect shade with our color specialists using high-quality, ammonia-free color systems.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>Color consultation & matching</li>
+                                    <li>Full color or highlight service</li>
+                                    <li>Toning & color correction</li>
+                                    <li>Deep conditioning treatment</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $120</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <h3 class="service-title">Hair Treatments</h3>
+                            <p class="service-description">Restore and rejuvenate your hair with our intensive treatment services for all hair types.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>Keratin smoothing treatments</li>
+                                    <li>Deep hydration masks</li>
+                                    <li>Protein reconstruction therapy</li>
+                                    <li>Scalp treatments & massage</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $95</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spa Services -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="service-category">
+                <div class="category-header">
+                    <h2><i class="fas fa-spa me-3"></i>Spa & Wellness</h2>
+                    <p>Indulge in our luxurious spa treatments designed to relax, rejuvenate, and restore your natural glow.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3 class="service-title">Signature Facials</h3>
+                            <p class="service-description">Customized facial treatments using premium skincare products to address your specific skin concerns.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>Skin analysis & consultation</li>
+                                    <li>Deep cleansing & exfoliation</li>
+                                    <li>Custom mask application</li>
+                                    <li>Moisturizing & sun protection</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $110</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-hands"></i>
+                            </div>
+                            <h3 class="service-title">Massage Therapy</h3>
+                            <p class="service-description">Therapeutic massages to relieve tension, improve circulation, and promote overall wellness.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>Swedish relaxation massage</li>
+                                    <li>Deep tissue therapy</li>
+                                    <li>Hot stone treatment</li>
+                                    <li>Aromatherapy enhancement</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $130</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h3 class="service-title">Body Treatments</h3>
+                            <p class="service-description">Luxurious body treatments to exfoliate, hydrate, and rejuvenate your skin from head to toe.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>Body scrubs & wraps</li>
+                                    <li>Detoxifying treatments</li>
+                                    <li>Hydrating body masks</li>
+                                    <li>Anti-aging body therapy</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $95</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nail Services -->
+    <section class="py-5">
+        <div class="container">
+            <div class="service-category">
+                <div class="category-header">
+                    <h2><i class="fas fa-hand-sparkles me-3"></i>Nail Care</h2>
+                    <p>Expert nail care services with attention to detail and the latest trends in nail art and design.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-hand-paper"></i>
+                            </div>
+                            <h3 class="service-title">Luxury Manicure</h3>
+                            <p class="service-description">Complete nail care including shaping, cuticle care, massage, and perfect polish application.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>Nail shaping & filing</li>
+                                    <li>Cuticle care & treatment</li>
+                                    <li>Hand massage with luxury cream</li>
+                                    <li>Base coat, color & top coat</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $45</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-shoe-prints"></i>
+                            </div>
+                            <h3 class="service-title">Spa Pedicure</h3>
+                            <p class="service-description">Relaxing foot treatment with exfoliation, massage, and beautiful polish for healthy, beautiful feet.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>Foot soak & softening</li>
+                                    <li>Callus removal & exfoliation</li>
+                                    <li>Nail trimming & shaping</li>
+                                    <li>Foot & leg massage</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $55</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3 class="service-title">Nail Art & Gel</h3>
+                            <p class="service-description">Creative nail designs and long-lasting gel applications for stunning, durable nails.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>Custom nail art designs</li>
+                                    <li>Gel polish application</li>
+                                    <li>French manicure variations</li>
+                                    <li>Special occasion nails</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $65</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Makeup Services -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="service-category">
+                <div class="category-header">
+                    <h2><i class="fas fa-paint-brush me-3"></i>Makeup Services</h2>
+                    <p>Professional makeup application for any occasion, using high-end cosmetics and expert techniques.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3 class="service-title">Special Event Makeup</h3>
+                            <p class="service-description">Flawless makeup for weddings, parties, photoshoots, and special occasions that lasts all day.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>Consultation & style planning</li>
+                                    <li>Full face makeup application</li>
+                                    <li>False lash application</li>
+                                    <li>Touch-up kit provided</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $85</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="service-title">Makeup Lessons</h3>
+                            <p class="service-description">Learn professional makeup techniques with personalized instruction from our expert makeup artists.</p>
+                            <div class="service-details">
+                                <ul>
+                                    <li>One-on-one instruction</li>
+                                    <li>Product recommendations</li>
+                                    <li>Technique demonstrations</li>
+                                    <li>Take-home instruction sheet</li>
+                                </ul>
+                            </div>
+                            <div class="service-price">
+                                <span class="price-tag">From $95</span>
+                                <a href="contact.html" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Packages -->
+    <section class="package-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 1rem;">Luxury Packages</h2>
+                <p style="font-size: 1.1rem; color: var(--text-light); max-width: 600px; margin: 0 auto;">Save with our carefully curated service packages designed for the ultimate beauty experience.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="package-card">
+                        <h3 class="package-title">Glow Up</h3>
+                        <div class="package-price">
+                            <span class="original">$240</span>$180
+                        </div>
+                        <div class="service-details text-start">
+                            <ul>
+                                <li>Signature Facial</li>
+                                <li>Luxury Manicure</li>
+                                <li>Basic Makeup Application</li>
+                                <li>Complimentary Consultation</li>
+                            </ul>
+                        </div>
+                        <a href="contact.html" class="btn-book">Book Package</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="package-card featured">
+                        <div class="package-badge">Most Popular</div>
+                        <h3 class="package-title">Total Transformation</h3>
+                        <div class="package-price">
+                            <span class="original">$400</span>$299
+                        </div>
+                        <div class="service-details text-start">
+                            <ul>
+                                <li>Cut, Color & Style</li>
+                                <li>Signature Facial</li>
+                                <li>Spa Pedicure</li>
+                                <li>Gel Manicure</li>
+                                <li>Special Event Makeup</li>
+                            </ul>
+                        </div>
+                        <a href="contact.html" class="btn-book">Book Package</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="package-card">
+                        <h3 class="package-title">Bridal Bliss</h3>
+                        <div class="package-price">
+                            <span class="original">$550</span>$449
+                        </div>
+                        <div class="service-details text-start">
+                            <ul>
+                                <li>Bridal Hair Styling</li>
+                                <li>Wedding Makeup</li>
+                                <li>Luxury Manicure & Pedicure</li>
+                                <li>Relaxation Massage</li>
+                                <li>Trial Session Included</li>
+                            </ul>
+                        </div>
+                        <a href="contact.html" class="btn-book">Book Package</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="logo.png.jpeg" alt="Luxe Beauty Salon Logo" class="rounded-circle" style="height: 50px; margin-right: 10px;">
+            <span>Luxe Beauty</span>
+            </a>
+                    <p>Your premier destination for luxury beauty services. We combine expertise with elegance to bring out your natural beauty.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-light text-decoration-none">Home</a></li>
+                        <li><a href="about.html" class="text-light text-decoration-none">About</a></li>
+                        <li><a href="services.html" class="text-light text-decoration-none">Services</a></li>
+                        <li><a href="portfolio.html" class="text-light text-decoration-none">Portfolio</a></li>
+                        <li><a href="extras.html" class="text-light text-decoration-none">Shop & More</a></li>
+                        <li><a href="training.html" class="text-light text-decoration-none">Training</a></li>
+                        <li><a href="contact.html" class="text-light text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Contact Info</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>123 Beauty Street, Salon City</p>
+                    <p><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope me-2"></i>info@luxebeauty.com</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Opening Hours</h5>
+                    <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                    <p>Saturday: 9:00 AM - 6:00 PM</p>
+                    <p>Sunday: 10:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>&copy; 2025 Luxe Beauty Salon. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Service card hover effects
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

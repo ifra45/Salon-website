@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop & More - Luxe Beauty Salon</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d4af37;
+            --secondary-color: #2c2c2c;
+            --accent-color: #f8f8f8;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(44, 44, 44, 0.95);
+        }
+
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color) !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, var(--primary-color), #b8941f);
+            color: white;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><circle cx="100" cy="100" r="80" fill="rgba(255,255,255,0.1)"/><circle cx="900" cy="200" r="120" fill="rgba(255,255,255,0.05)"/><circle cx="1100" cy="80" r="60" fill="rgba(255,255,255,0.08)"/></svg>');
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(0px) rotate(0deg); }
+            50% { transform: translateX(-20px) rotate(3deg); }
+        }
+
+        .hero-banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: var(--primary-color);
+        }
+
+        .product-image {
+            height: 250px;
+            background: linear-gradient(45deg, #f8f8f8, #e8e8e8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), transparent);
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-luxury {
+            background: linear-gradient(45deg, var(--primary-color), #b8941f);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .btn-luxury:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
+            color: white;
+        }
+
+        .gift-card-section {
+            background: linear-gradient(135deg, var(--accent-color), #f0f0f0);
+            padding: 5rem 0;
+        }
+
+        .gift-card {
+            background: linear-gradient(135deg, var(--primary-color), #b8941f);
+            border-radius: 20px;
+            padding: 3rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .gift-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="3" fill="rgba(255,255,255,0.05)"/><circle cx="60" cy="80" r="2.5" fill="rgba(255,255,255,0.08)"/></svg>');
+            animation: sparkle 20s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .gift-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .gift-amounts {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .amount-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .amount-btn:hover,
+        .amount-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            border-left: 4px solid var(--primary-color);
+            height: 100%;
+            position: relative;
+        }
+
+        .review-stars {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .review-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), #b8941f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .review-info h6 {
+            margin: 0;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .review-info small {
+            color: var(--text-light);
+        }
+
+        .loyalty-program {
+            background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .loyalty-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: 100%;
+        }
+
+        .loyalty-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--accent-color), #f0f0f0);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--secondary-color), #1a1a1a);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer h5 {
+            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-banner h1 {
+                font-size: 2.5rem;
+            }
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-input {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <!--logo-->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="logo.png.jpeg" alt="Luxe Beauty Salon Logo" class="rounded-circle" style="height: 50px; margin-right: 10px;">
+            <span>Luxe Beauty</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="training.html">Training</a></li>
+                    <li class="nav-item"><a class="nav-link" href="extras.html">Shop & More</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container">
+            <h1><i class="fas fa-shopping-bag me-3"></i>Shop & More</h1>
+            <p class="lead">Discover premium beauty products, luxury gift cards, and exclusive member benefits</p>
+        </div>
+    </section>
+
+    <!-- Premium Products -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Premium Beauty Products</h2>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <i class="fas fa-pump-soap"></i>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-price">$45.00</div>
+                            <h5 class="product-title">Luxury Hair Serum</h5>
+                            <p class="product-description">Professional-grade hair treatment serum for silky, nourished locks. Infused with argan oil and vitamins.</p>
+                            <button class="btn-luxury">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-price">$65.00</div>
+                            <h5 class="product-title">Hydrating Face Mask</h5>
+                            <p class="product-description">Intensive hydrating mask with hyaluronic acid and botanical extracts for radiant, plump skin.</p>
+                            <button class="btn-luxury">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <i class="fas fa-brush"></i>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-price">$28.00</div>
+                            <h5 class="product-title">Pro Makeup Brush Set</h5>
+                            <p class="product-description">Complete set of professional makeup brushes with synthetic bristles and ergonomic handles.</p>
+                            <button class="btn-luxury">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <i class="fas fa-hand-paper"></i>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-price">$35.00</div>
+                            <h5 class="product-title">Nail Care Kit</h5>
+                            <p class="product-description">Complete nail care system with strengthening base coat, premium polish, and nourishing cuticle oil.</p>
+                            <button class="btn-luxury">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <i class="fas fa-spray-can"></i>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-price">$52.00</div>
+                            <h5 class="product-title">Volume Hair Spray</h5>
+                            <p class="product-description">Long-lasting volume spray with heat protection and flexible hold for all-day stunning styles.</p>
+                            <button class="btn-luxury">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-price">$89.00</div>
+                            <h5 class="product-title">Anti-Aging Cream</h5>
+                            <p class="product-description">Luxurious anti-aging cream with peptides and retinol for firmer, younger-looking skin.</p>
+                            <button class="btn-luxury">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-price">$95.00</div>
+                            <h5 class="product-title">Signature Lipstick Collection</h5>
+                            <p class="product-description">Curated collection of 6 premium lipsticks in our most popular shades with long-lasting formula.</p>
+                            <button class="btn-luxury">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-price">$120.00</div>
+                            <h5 class="product-title">Spa At-Home Kit</h5>
+                            <p class="product-description">Complete spa experience kit with body scrub, moisturizer, essential oils, and relaxation accessories.</p>
+                            <button class="btn-luxury">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gift Cards Section -->
+    <section class="gift-card-section">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--secondary-color);">Luxury Gift Cards</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="gift-card">
+                        <h3><i class="fas fa-gift me-3"></i>Perfect Gift for Every Occasion</h3>
+                        <p class="lead mb-4">Give the gift of luxury and let your loved ones experience our premium beauty services</p>
+                        
+                        <div class="gift-amounts">
+                            <div class="amount-btn" data-amount="50">$50</div>
+                            <div class="amount-btn active" data-amount="100">$100</div>
+                            <div class="amount-btn" data-amount="150">$150</div>
+                            <div class="amount-btn" data-amount="200">$200</div>
+                            <div class="amount-btn" data-amount="custom">Custom</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <input type="number" class="form-control d-none" id="customAmount" placeholder="Enter custom amount" style="max-width: 200px; margin: 0 auto; border-radius: 50px; text-align: center;">
+                        </div>
+                        
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            <button class="btn btn-light btn-lg px-4" style="border-radius: 50px;">
+                                <i class="fas fa-credit-card me-2"></i>Purchase Digital
+                            </button>
+                            <button class="btn btn-outline-light btn-lg px-4" style="border-radius: 50px;">
+                                <i class="fas fa-envelope me-2"></i>Send Physical Card
+                            </button>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <small><i class="fas fa-info-circle me-1"></i>Gift cards never expire • Can be used for all services and products</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Are Saying</h2>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"I've been using their hair products for months now and my hair has never looked better! The serum is absolutely amazing and the results are instant."</p>
+                        <div class="review-author">
+                            <div class="review-avatar">AK</div>
+                            <div class="review-info">
+                                <h6>Amanda K.</h6>
+                                <small>Verified Purchase</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"The gift card was perfect for my sister's birthday! She loved the spa experience and the staff made her feel like royalty. Will definitely buy again."</p>
+                        <div class="review-author">
+                            <div class="review-avatar">MR</div>
+                            <div class="review-info">
+                                <h6>Michelle R.</h6>
+                                <small>Gift Card Purchase</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"The makeup brush set is phenomenal! Professional quality at a great price. My makeup application has improved dramatically since I started using them."</p>
+                        <div class="review-author">
+                            <div class="review-avatar">LT</div>
+                            <div class="review-info">
+                                <h6>Lisa T.</h6>
+                                <small>Verified Purchase</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"I'm obsessed with the anti-aging cream! I've seen visible improvements in just 3 weeks. My skin feels so much firmer and looks radiant."</p>
+                        <div class="review-author">
+                            <div class="review-avatar">DR</div>
+                            <div class="review-info">
+                                <h6>Diana R.</h6>
+                                <small>Loyalty Member</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"The spa at-home kit was a game changer during the holidays. It's like having a luxury spa experience in the comfort of my own home. Highly recommend!"</p>
+                        <div class="review-author">
+                            <div class="review-avatar">JM</div>
+                            <div class="review-info">
+                                <h6>Jessica M.</h6>
+                                <small>Verified Purchase</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"Customer service is exceptional! They helped me choose the perfect products for my skin type and even followed up to make sure I was happy. True professionals!"</p>
+                        <div class="review-author">
+                            <div class="review-avatar">CW</div>
+                            <div class="review-info">
+                                <h6>Christine W.</h6>
+                                <small>VIP Member</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loyalty Program -->
+    <section class="loyalty-program">
+        <div class="container">
+            <h2 class="section-title">Join Our Loyalty Program</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="loyalty-card">
+                        <div class="loyalty-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Exclusive Benefits</h3>
+                        <p>Earn points with every purchase, enjoy special discounts, and receive exclusive offers as a loyalty member.</p>
+                        <button class="btn btn-light btn-lg px-4" style="border-radius: 50px;">
+                            <i class="fas fa-user-plus me-2"></i>Join Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="logo.png.jpeg" alt="Luxe Beauty Salon Logo" class="rounded-circle" style="height: 50px; margin-right: 10px;">
+            <span>Luxe Beauty</span>
+            </a>
+                    <p>Your premier destination for luxury beauty services. We combine expertise with elegance to bring out your natural beauty.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-light text-decoration-none">Home</a></li>
+                        <li><a href="about.html" class="text-light text-decoration-none">About</a></li>
+                        <li><a href="services.html" class="text-light text-decoration-none">Services</a></li>
+                        <li><a href="portfolio.html" class="text-light text-decoration-none">Portfolio</a></li>
+                        <li><a href="extras.html" class="text-light text-decoration-none">Shop & More</a></li>
+                        <li><a href="training.html" class="text-light text-decoration-none">Training</a></li>
+                        <li><a href="contact.html" class="text-light text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Contact Info</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>123 Beauty Street, Salon City</p>
+                    <p><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope me-2"></i>info@luxebeauty.com</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Opening Hours</h5>
+                    <p>Monday - Friday: 9:00 AM - 8:00 PM</p>
+                    <p>Saturday: 9:00 AM - 6:00 PM</p>
+                    <p>Sunday: 10:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>&copy; 2025 Luxe Beauty Salon. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 100;
+
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Trigger counter animation when stats section is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
